@@ -25,6 +25,7 @@ public class KetuService extends Service{
         // start the foreground notification so service stays alive
         startForegroundService();
         Log.d("KetuService", "Service started - waiting for push-to-talk trigger");
+
     }
     // build and display the persistent foreground notification
     private void startForegroundService(){
@@ -53,6 +54,7 @@ public class KetuService extends Service{
     public void onWakeWordDetected(){
         // TODO:Triggers screenshot capture - coming in the next step
         Log.d("KetuService", "Wake word detected - screenshot capture will go here ");
+
     }
     @Override
     public void onDestroy(){

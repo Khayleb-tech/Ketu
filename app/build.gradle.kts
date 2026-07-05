@@ -42,6 +42,7 @@ android {
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation("androidx.activity:activity:1.9.0")
     implementation("com.alphacephei:vosk-android:0.3.47")
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)

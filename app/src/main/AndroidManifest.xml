@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
     <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-
-    <queries>
-        <intent>
-            <action android:name="andrroid.speech.RecognitionService"/>
-        </intent>
-        <package android:name="com.google.android.googlequicksearchbox"/>
-    </queries>
 
     <application
         android:allowBackup="true"
@@ -29,9 +21,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-            <service
-                android:name=".KetuService"
-                android:foregroundServiceType="dataSync" />
+        <service
+            android:name=".KetuService"
+            android:foregroundServiceType="dataSync"
+            android:exported="false" />
+        <service
+            android:name=".ScreenCaptureService"
+            android:foregroundServiceType="mediaProjection"
+            android:exported="false" />
 
     </application>
 

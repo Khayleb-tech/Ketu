@@ -4,10 +4,16 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.projection.MediaProjection;
+import android.media.projection.MediaProjectionManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private Button btnMic;
     private TextView tvStatus;
     private TextView tvResult;
+    private MediaProjectionManager mediaProjectionManager;
+    private boolean captureAuthorized = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         // Start the background service for Ketu
         startKetuService();
 
+        // start the background service for screen capture
+        startScreenCaptureService();
+
         // When the mic button is pressed, start listening for speech
         btnMic.setOnClickListener(v -> startListening());
 
@@ -72,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             requestAudioPermission();
         }
+        
     }
 
     @Override
@@ -121,6 +133,15 @@ public class MainActivity extends AppCompatActivity {
         } else {
             startService(serviceIntent);
         }
+    }
+    private void startScreenCaptureService() {
+        Intent serviceIntent = new Intent(this, ScreenCaptureService.class);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(serviceIntent);
+        } else {
+            startService(serviceIntent);
+        }
+                            
     }
 
     // Copy the Vosk model from assets to internal storage and load it
@@ -260,7 +281,17 @@ public class MainActivity extends AppCompatActivity {
                     tvStatus.setText("Wake word detected!");
                     Toast.makeText(MainActivity.this, "Ketu activated!", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "Wake word detected in: " + spokenText);
-                    // TODO: trigger screenshot + scam analysis here
+
+                    if (captureAuthorized){
+                        
+                        startScreenCaptureService();
+                    }else{
+                       
+                        //permission for screen capture
+                        mediaProjectionManager = (MediaProjectionManager) getSystemService(Context.MEDIA_PROJECTION_SERVICE);
+                        screenCaptureLauncher.launch(mediaProjectionManager.createScreenCaptureIntent());
+                    }
+
                 } else {
                     tvStatus.setText("Say 'Ketu' to activate");
                 }
@@ -296,6 +327,27 @@ public class MainActivity extends AppCompatActivity {
             stopListening();
         }
     };
+
+    //implementing the screenshot capture
+    private final ActivityResultLauncher<Intent> screenCaptureLauncher = registerForActivityResult(
+        new ActivityResultContracts.StartActivityForResult(),
+        result -> {
+            if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                captureAuthorized = true;
+                Log.d(TAG, "MediaProjection permission granted");
+                
+                Intent serviceIntent = new Intent(MainActivity.this, ScreenCaptureService.class);
+                serviceIntent.putExtra("RESULT_CODE", result.getResultCode());
+                serviceIntent.putExtra("DATA_INTENT", result.getData());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+                    startForegroundService(serviceIntent);
+                }else{
+                    startService(serviceIntent);
+                }
+            }
+        }
+    );
+
     //words that sound similar to "ketu" on vosk
     private boolean isWakeWord(String text){
         if (text == null || text.isEmpty()) return false;
@@ -311,10 +363,9 @@ public class MainActivity extends AppCompatActivity {
             || t.contains("kettle")
             || t.contains("kids")
             || t.contains("cats")
-            || t.contains("cat");
-            
-
-
+            || t.contains("cat")
+            || t.contains("get to")
+            || t.contains("tattoo");
     }
 
     // Extract the "text" field from Vosk's JSON response
