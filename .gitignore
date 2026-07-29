@@ -15,8 +15,7 @@ app/build
 .cxx
 local.properties
 app/src/main/assets/model
-.apk
-.aab
+*.apk
+*.aab
 .idea
-.iml
 .vscode

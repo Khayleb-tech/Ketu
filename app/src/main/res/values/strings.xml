@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ketu</string>
+    <string name="accessibility_service_description">Monitors screen content and detects possible scam-related activity for your protection.</string>
 </resources>

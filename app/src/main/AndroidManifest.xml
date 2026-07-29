@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
-
+    
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,14 +19,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service
-            android:name=".KetuService"
-            android:foregroundServiceType="dataSync"
-            android:exported="false" />
-        <service
-            android:name=".ScreenCaptureService"
-            android:foregroundServiceType="mediaProjection"
-            android:exported="false" />
+
+                <!-- Accessibility Service Registration -->
+        <service 
+            android:name=".MyAccessibilityService"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            android:exported="true"
+            android:label="Ketu Accessibility Service">
+            <intent-filter>
+                <action 
+                    android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+                <!-- Link to your XML configuration file -->
+            <meta-data
+            android:name="android.accessibilityservice"
+            android:resource="@xml/accessibility_service_config" />
+        </service>
 
     </application>
 

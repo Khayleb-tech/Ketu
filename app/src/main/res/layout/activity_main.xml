@@ -39,6 +39,22 @@
         android:gravity="center"
         android:layout_marginBottom="40dp" />
 
+    <!-- Accessibility permission button -->
+    <Button
+        android:id="@+id/btnPermission"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable Accessibility Permission"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Protection toggle -->
+    <Switch
+        android:id="@+id/switchDetector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Protection Enabled"
+        android:layout_marginBottom="24dp" />
+
     <!-- Mic button — tap to listen -->
     <Button
         android:id="@+id/btnMic"
