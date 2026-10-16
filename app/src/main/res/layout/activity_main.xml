@@ -1,79 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    android:padding="32dp"
-    android:background="#121212">
+    android:background="@color/ketu_background"
+    android:fitsSystemWindows="true">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
 
     <!-- App title -->
     <TextView
-        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="KETU"
-        android:textSize="36sp"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:letterSpacing="0.3"
-        android:layout_marginBottom="8dp" />
+        android:text="Protection Center"
+        android:textColor="@color/ketu_ink"
+        android:textSize="26sp"
+        android:textStyle="bold" />
 
-    <!-- Subtitle -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scam Detector"
-        android:textSize="14sp"
-        android:textColor="#888888"
-        android:layout_marginBottom="64dp" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Ketu protection banner"
+        android:scaleType="centerInside"
+        android:src="@drawable/ketu_app_logo" />
 
     <!-- Status label — shows what's happening -->
     <TextView
         android:id="@+id/tvStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tap the mic and speak"
-        android:textSize="16sp"
-        android:textColor="#AAAAAA"
-        android:gravity="center"
-        android:layout_marginBottom="40dp" />
+        android:text="Ketu is watching for threats on your device."
+        android:textSize="15sp"
+        android:textColor="@color/ketu_muted"
+        android:layout_marginTop="6dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@color/ketu_surface"
+        android:elevation="3dp"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="System secured"
+            android:textColor="@color/ketu_ink"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="On-device protection is ready to scan suspicious activity."
+            android:textColor="@color/ketu_muted"
+            android:textSize="14sp" />
+
+        <Switch
+            android:id="@+id/switchDetector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Protection enabled"
+            android:textColor="@color/ketu_ink"
+            android:textSize="16sp" />
+    </LinearLayout>
 
     <!-- Accessibility permission button -->
     <Button
         android:id="@+id/btnPermission"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Enable Accessibility Permission"
-        android:layout_marginBottom="16dp" />
-
-    <!-- Protection toggle -->
-    <Switch
-        android:id="@+id/switchDetector"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Protection Enabled"
-        android:layout_marginBottom="24dp" />
-
-    <!-- Mic button — tap to listen -->
-    <Button
-        android:id="@+id/btnMic"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:text="🎤"
-        android:textSize="40sp"
-        android:backgroundTint="#1DB954"
-        android:layout_marginBottom="40dp" />
-
-    <!-- Result area — shows what was heard -->
-    <TextView
-        android:id="@+id/tvResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="14sp"
-        android:textColor="#CCCCCC"
-        android:gravity="center"
-        android:padding="16dp" />
+        android:layout_marginTop="16dp"
+        android:text="Enable Accessibility Permission"
+        android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/btnViewAlerts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="View Scam Alerts"
+        android:textAllCaps="false" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/ketu_surface"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/btnHome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:enabled="false"
+            android:text="Detection"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnSettings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="About"
+            android:textAllCaps="false" />
+    </LinearLayout>
 </LinearLayout>

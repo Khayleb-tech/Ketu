@@ -15,6 +15,7 @@ app/build
 .cxx
 local.properties
 app/src/main/assets/model
+*.jks
 *.apk
 *.aab
 .idea

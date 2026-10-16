@@ -1,3 +1,5 @@
+import java.util.Properties
+import java.io.FileInputStream
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -37,14 +39,38 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    val properties = Properties()
+    val localPropertiesFile = rootProject.file("local.properties")
+    if (localPropertiesFile.exists()) {
+        properties.load(FileInputStream(localPropertiesFile))
+    }
+    signingConfigs {
+        create("release") {
+            storeFile = file(properties.getProperty("RELEASE_STORE_FILE") ?: "")
+            storePassword = properties.getProperty("RELEASE_STORE_PASSWORD") ?: ""
+            keyAlias = properties.getProperty("RELEASE_KEY_ALIAS") ?: ""
+            keyPassword = properties.getProperty("RELEASE_KEY_PASSWORD") ?: ""
+        }
+    }
+    buildTypes {
+        release {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            
+            //Tell Gradle to sign the release build using the config above
+            signingConfig = signingConfigs.getByName("release")
+        }
+    }
+    
 }
 
 dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation("androidx.activity:activity:1.9.0")
-    implementation("com.alphacephei:vosk-android:0.3.47")
     testImplementation(libs.junit)
     androidTestImplementation(libs.espresso.core)
     androidTestImplementation(libs.ext.junit)
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.google.code.gson:gson:2.10.1")
 }

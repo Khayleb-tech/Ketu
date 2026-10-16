@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF7E00"
+    android:padding="8dp">
+
+    <LinearLayout
+        android:id="@+id/warning_text_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_toStartOf="@id/close_warning"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/warning_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="⚠️ SCAM WARNING"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:maxLines="1" />
+
+        <TextView
+            android:id="@+id/warning_reason"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/close_warning"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:contentDescription="Close Warning"
+        android:tint="#FFFFFF" />
+
+</RelativeLayout>

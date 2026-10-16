@@ -1,9 +1,9 @@
 <accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
     android:description="@string/accessibility_service_description"
-    android:packageNames="com.whatsapp,com.whatsapp.w4b,com.facebook.lite,com.facebook.katana,com.facebook.orca,com.instagram.android,com.zhiliaoapp.musically,org.telegram.messenger,com.twitter.android,com.google.android.gm"
-    android:accessibilityEventTypes="typeWindowContentChanged|typeWindowStateChanged"
+    android:packageNames="com.whatsapp,com.whatsapp.w4b,com.facebook.lite,com.facebook.katana,com.facebook.orca,com.instagram.android,com.zhiliaoapp.musically,org.telegram.messenger,com.twitter.android,com.google.android.gm,com.zhiliaoapp.musically.go"
+    android:accessibilityEventTypes="typeWindowContentChanged|typeWindowStateChanged|typeViewScrolled"
     android:accessibilityFlags="flagDefault|flagIncludeNotImportantViews"
     android:accessibilityFeedbackType="feedbackGeneric"
     android:notificationTimeout="100"
     android:canRetrieveWindowContent="true"
-    android:canPerformGestures="false" />
+    android:canPerformGestures="true" />

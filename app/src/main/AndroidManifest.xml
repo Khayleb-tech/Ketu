@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ketu_app_icon"
         android:label="Ketu"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/ketu_app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ketu">
 
         <activity
             android:name=".MainActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
+
+        <activity
+            android:name=".OverlayPermissionActivity"
+            android:exported="false"
+            android:label="Overlay permission" />
 
                 <!-- Accessibility Service Registration -->
         <service 
@@ -36,6 +42,34 @@
             android:name="android.accessibilityservice"
             android:resource="@xml/accessibility_service_config" />
         </service>
+
+        <activity android:name=".AlertsListActivity" 
+                  android:exported="true">
+        </activity>
+
+        <activity 
+            android:name=".AlertAnalysisActivity"
+            android:exported="false"
+            android:label="Alert Analysis Details" />
+
+        <activity
+            android:name=".LegalActivity"
+            android:exported="false"
+            android:label="About &amp; Privacy" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:label="Settings" />
+        
+        <activity
+            android:name=".OnboardingActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
     </application>
 

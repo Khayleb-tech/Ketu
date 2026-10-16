@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:id="@+id/overlay_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Overlay permission status"
+        android:textSize="16sp"
+        android:paddingBottom="16dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="This app needs the 'Display over other apps' permission so it can show contextual warnings over messages. Tap the button below to open settings and grant permission."
+        android:textSize="14sp"
+        android:paddingBottom="16dp" />
+
+    <Button
+        android:id="@+id/btn_request_overlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Grant overlay permission" />
+
+</LinearLayout>

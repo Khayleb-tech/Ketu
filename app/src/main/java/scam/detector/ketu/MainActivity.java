@@ -18,6 +18,13 @@ import android.widget.Switch;
 import android.content.SharedPreferences;
 import android.provider.Settings;
 
+import android.net.Uri;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.os.PowerManager;
+import android.provider.Settings;
+import android.app.AlertDialog;
+
 public class MainActivity extends AppCompatActivity {
 
     // Constants for SharedPreferences
@@ -34,24 +41,33 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkAndDisableBatteryOptimization();
 
         // Initialize UI elements
         Button btnPermission = findViewById(R.id.btnPermission);
         Switch switchDetector = findViewById(R.id.switchDetector);
+        Button btnViewAlerts = findViewById(R.id.btnViewAlerts);
+        Button btnSettings = findViewById(R.id.btnSettings);
+        btnViewAlerts.setOnClickListener(v -> {
+            startActivity(new Intent(this, AlertsListActivity.class));
+        });
+        btnSettings.setOnClickListener(v -> startActivity(new Intent(this, SettingsActivity.class)));
 
-        // 1. System Accessibility Permission Button
+        // System Accessibility Permission Button
         btnPermission.setOnClickListener(v -> {
             if (!isAccessibilityServiceEnabled(this, MyAccessibilityService.class)) {
                 // Drop the user directly into Android's Accessibility Settings page
                 Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+            } else if (!Settings.canDrawOverlays(this)) {
+                requestOverlayPermission();
             } else {
                 Toast.makeText(this, "Permission already granted!", Toast.LENGTH_SHORT).show();
             }
         });
 
-        // 2. Internal Kill-Switch (Saves state locally in SharedPreferences)
+        // Internal Kill-Switch (Saves state locally in SharedPreferences)
         SharedPreferences sharedPrefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         
         // Load previous state (defaults to true if app was just installed)
@@ -67,6 +83,49 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+   private void checkAndDisableBatteryOptimization() {
+        PowerManager powerManager = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        
+        if (powerManager != null) {
+            String packageName = getPackageName();
+            
+            // Only trigger if the app is still being optimized
+            if (!powerManager.isIgnoringBatteryOptimizations(packageName)) {
+                
+                // Inflate the custom XML view layout
+                LayoutInflater inflater = LayoutInflater.from(this);
+                View dialogView = inflater.inflate(R.layout.dialog_battery_warning, null);
+
+                // Build the AlertDialog using the custom view
+                AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setView(dialogView)
+                    .setCancelable(false) // Forces user interaction
+                    .create();
+
+                // Find the YES button within the custom layout and attach the click listener
+                Button btnYes = dialogView.findViewById(R.id.btn_dialog_yes);
+                btnYes.setOnClickListener(v -> {
+                    dialog.dismiss(); // Close the dialog box first
+                    
+                    // Redirect user directly to the battery optimization selection list
+                    Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                    try {
+                        startActivity(intent);
+                    } catch (Exception e) {
+                        // Fallback configuration intent for older SDK variants
+                        Intent fallbackIntent = new Intent();
+                        fallbackIntent.setAction(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                        fallbackIntent.setData(Uri.parse("package:" + packageName));
+                        startActivity(fallbackIntent);
+                    }
+                });
+
+                // Present the dialog window on screen
+                dialog.show();
+            }
+        }
+    }
+
     /// Helper method to verify if the OS has physically enabled your service
     private boolean isAccessibilityServiceEnabled(Context context, Class<?> serviceClass) {
         String expectedComponentName = context.getPackageName() + "/" + serviceClass.getName();
@@ -75,6 +134,13 @@ public class MainActivity extends AppCompatActivity {
                 Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES
         );
         return settingValue != null && settingValue.contains(expectedComponentName);
+    }
+
+    private void requestOverlayPermission() {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                Uri.parse("package:" + getPackageName()));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override

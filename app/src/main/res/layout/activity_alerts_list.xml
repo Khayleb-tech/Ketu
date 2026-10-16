@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/ketu_background"
+    android:padding="20dp"
+    android:fitsSystemWindows="true">
+
+    <Button
+        android:id="@+id/btnAlertsBack"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:minWidth="0dp"
+        android:minHeight="0dp"
+        android:text="←"
+        android:textAllCaps="false"
+        android:textSize="22sp"
+        android:contentDescription="Back" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scam Alerts"
+        android:textColor="@color/ketu_ink"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Recent detections from Ketu protection"
+        android:textColor="@color/ketu_muted"
+        android:textSize="14sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/alertsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="18dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:paddingBottom="12dp" />
+
+    <TextView
+        android:id="@+id/emptyStateView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="No alerts yet"
+        android:textSize="16sp"
+        android:textColor="@color/ketu_muted"
+        android:visibility="gone" 
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+</LinearLayout>

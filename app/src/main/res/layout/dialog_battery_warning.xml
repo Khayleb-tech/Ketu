@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_horizontal"
+    android:background="@color/black">
+
+    <!-- Warning Icon -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⚠️"
+        android:textSize="48sp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Background Interruption"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Message Description -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Battery optimization is currently active. Your scam detection overlay will fail to display unless this is turned off.\n\nWould you like to disable battery optimization now?"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:gravity="center"
+        android:lineSpacingMultiplier="1.2"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Branded YES Button -->
+    <Button
+        android:id="@+id/btn_dialog_yes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="YES"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:backgroundTint="#F2E5D7"
+        android:padding="12dp" />
+
+</LinearLayout>

@@ -1,0 +1,101 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ketu_background"
+    android:fillViewport="true">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="28dp">
+
+    <TextView
+        android:id="@+id/ketuMark"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="36dp"
+        android:background="@color/ketu_blue"
+        android:gravity="center"
+        android:text="KETU"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/onboardingContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:text="Kettle-inspired protection"
+        android:textColor="@color/ketu_blue"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:text="Trusted Protection."
+        android:textColor="@color/ketu_ink"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="Inspired by the bimetallic strip in a kettle, Ketu reacts to rising digital heat and helps stop threats before they harm you."
+        android:textColor="@color/ketu_muted"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:background="@color/ketu_soft_green"
+        android:padding="20dp"
+        android:text="LOCAL ANALYSIS\n\nScan suspicious activity on your device, keep your messages private, and receive instant alerts."
+        android:textColor="@color/ketu_ink"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="HOW TO ENABLE KETU"
+        android:textColor="@color/ketu_ink"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="1. Tap Get Started to open Ketu.\n\n2. Tap Enable Accessibility Permission, then find Ketu under Installed apps or Downloaded services.\n\n3. Turn on Ketu and allow the requested accessibility access. This lets Ketu read visible link and message content to detect scams in real time.\n\n4. When Android asks about display over other apps access, allow it so Ketu can show an alert over the app you are using.\n\n5. Allow battery optimization to be disabled so protection can continue while Ketu is running in the background."
+        android:textColor="@color/ketu_muted"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/ketu_soft_blue"
+        android:padding="16dp"
+        android:text="PRIVACY NOTE\nKetu uses these permissions only for protection and threat alerts. Your normal app activity is not collected as a general purpose record."
+        android:textColor="@color/ketu_ink"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnGetStarted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Get Started"
+        android:textSize="14sp"
+        android:textAllCaps="false" />
+
+</LinearLayout>
+</ScrollView>
